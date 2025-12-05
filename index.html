@@ -3,42 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Linux vs Windows</title>
+    <title>Quiz Linux - MVC Controller-Driven</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
     <div class="container quiz-container">
-        
-        <div id="game-screen">
-            <div class="card shadow-sm mb-4">
-                <div class="card-body p-5 text-center">
-                    <h5 class="text-uppercase text-muted mb-3">Question <span id="current-question-number">1</span> / <span id="total-questions">4</span></h5>
-                    <h2 id="question-text" class="fw-bold">...</h2>
-                </div>
-            </div>
-
-            <div class="card shadow-sm">
-                <div class="card-body p-4">
-                    <div id="answers-area" class="d-grid gap-3"></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="result-screen" class="card shadow-lg text-center p-5 d-none">
-            <h2 class="display-4 mb-3">Quiz Terminé !</h2>
-            <p class="fs-3 my-4">Votre score : <strong id="final-score" class="text-primary"></strong></p>
-            <p id="comment-text" class="text-muted"></p>
-            <button id="btn-restart" class="btn btn-primary btn-lg mt-3">Recommencer</button>
-        </div>
-
+        <div id="app-container"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script src="MVC/Model/model.js"></script>
-    <script src="MVC/Vue/view.js"></script>
     <script src="MVC/Controller/controller.js"></script>
     <script src="MVC/app.js"></script>
 </body>

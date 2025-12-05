@@ -1,3 +1,3 @@
 document.addEventListener('DOMContentLoaded', () => {
-    Controller.start();
+    Controller.init();
 });
