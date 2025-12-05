@@ -7,11 +7,16 @@ const Controller = {
     async init() {
         this.appContainer = document.getElementById('app-container');
         
+        // Pré-chargement agressif pour éviter le lag au premier clic
         this.audioError.load();
         this.audioSuccess.load();
         this.audioFin.load();
 
         this.start();
+    },
+
+    melangerTableau(array) {
+        return array.sort(() => Math.random() - 0.5);
     },
 
     async fetchTemplate(path) {
@@ -49,7 +54,9 @@ const Controller = {
         const answersArea = document.getElementById('answers-area');
         answersArea.innerHTML = '';
 
-        currentQ.options.forEach(option => {
+        const optionsMelangees = this.melangerTableau([...currentQ.options]);
+
+        optionsMelangees.forEach(option => {
             const btn = document.createElement('button');
             btn.className = "btn btn-outline-dark text-start py-3 px-4 fw-bold shadow-sm";
             btn.textContent = option;
@@ -76,12 +83,13 @@ const Controller = {
     },
 
     triggerPunition() {
+        // PRIORITÉ ABSOLUE AU SON : On lance l'audio avant de toucher au DOM
+        this.audioError.currentTime = 0;
+        this.audioError.play().catch(e => console.log("Erreur son:", e));
+
         const body = document.body;
         const meme = document.getElementById('meme-overlay');
         const quizBox = document.getElementById('game-widget');
-
-        this.audioError.currentTime = 0;
-        this.audioError.play().catch(e => console.log("Erreur son:", e));
 
         if(quizBox) quizBox.classList.add('shake-effect');
         meme.classList.add('active');
@@ -95,11 +103,11 @@ const Controller = {
     },
 
     triggerSuccess() {
-        const body = document.body;
-        const successImg = document.getElementById('success-overlay');
-        
         this.audioSuccess.currentTime = 0;
         this.audioSuccess.play().catch(e => console.log("Erreur son:", e));
+
+        const body = document.body;
+        const successImg = document.getElementById('success-overlay');
 
         successImg.classList.add('active');
         body.classList.add('bg-success');
