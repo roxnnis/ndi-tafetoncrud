@@ -1,0 +1,95 @@
+body {
+    background-color: #e6ffe6;
+}
+
+.titles {
+    background-color: #4F7942;
+    color: white;
+    text-align: center;
+    padding-bottom: 10px;
+    font-family: "Lilita One", sans-serif;
+}
+
+h3 {
+    text-align: center;
+    padding: 10px;
+}
+
+
+.lilita-one-regular {
+  font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.pixelify-sans-pixel {
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 2;
+  font-style: normal;
+}
+
+.collapse {
+    background-color: #e6ffe6;
+    
+    font-family: "Lilita One", sans-serif;
+}
+
+.collapsed {
+    background-color: #4F7942;
+    color: white;
+    font-family: "Lilita One", sans-serif;
+    padding-bottom: 10px;
+}
+
+.collapsed:hover {
+    background-color: #3e5e32;
+    color: white;
+}
+
+.enchant {
+    font-family: "Pixelify Sans", sans-serif;
+    font-weight: 700;
+    font-size: 1.2em;
+    text-shadow: rgb(220, 45, 255) 0px 0px 10px;
+    
+}
+
+
+/* From Uiverse.io by Jedi-hongbin */ 
+.home {
+ display: flex;
+ height: 3em;
+ width: 100px;
+ align-items: center;
+ justify-content: center;
+ background-color: #eeeeee4b;
+ border-radius: 3px;
+ letter-spacing: 1px;
+ transition: all 0.2s linear;
+ cursor: pointer;
+ border: none;
+ background: #fff;
+}
+
+.home > svg {
+ margin-right: 5px;
+ margin-left: 5px;
+ font-size: 20px;
+ transition: all 0.4s ease-in;
+}
+
+.home:hover > svg {
+ font-size: 1.2em;
+ transform: translateX(-5px);
+}
+
+.home:hover {
+ box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+ transform: translateY(-2px);
+}
+
+span a {
+    text-decoration: none;
+    color: black;
+}
