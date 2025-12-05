@@ -1,45 +1,32 @@
-export class QuizController {
-    constructor(model, view) {
-        this.model = model;
-        this.view = view;
+const Controller = {
+    start() {
+        Model.score = 0;
+        Model.indexQuestion = 0;
+        
+        View.btnRestart.onclick = () => this.start();
+        
+        this.chargerQuestionSuivante();
+    },
 
-        // On connecte les événements de la Vue aux fonctions du Contrôleur
-        this.view.bindSubmitAnswer(this.handleSubmit.bind(this));
-        this.view.bindRestart(this.handleRestart.bind(this));
-
-        // Lancement initial
-        this.displayCurrentQuestion();
-    }
-
-    displayCurrentQuestion() {
-        const question = this.model.getCurrentQuestion();
-        const index = this.model.currentQuestionIndex;
-        this.view.renderQuestion(question, index);
-    }
-
-    handleSubmit() {
-        const answer = this.view.getSelectedAnswer();
-
-        if (answer) {
-            // 1. Vérifie la réponse
-            this.model.checkAnswer(answer);
-            
-            // 2. Passe à la suivante
-            this.model.nextQuestion();
-
-            // 3. Décide quoi afficher (Question suivante ou Résultat)
-            if (this.model.hasMoreQuestions()) {
-                this.displayCurrentQuestion();
-            } else {
-                this.view.showResult(this.model.score, this.model.getTotalQuestions());
-            }
+    chargerQuestionSuivante() {
+        if (Model.indexQuestion < Model.questions.length) {
+            const q = Model.questions[Model.indexQuestion];
+            View.afficherQuestion(q, Model.indexQuestion, Model.questions.length);
         } else {
-            alert("Merci de sélectionner une réponse avant de valider !");
+            View.afficherResultat(Model.score, Model.questions.length);
         }
-    }
+    },
 
-    handleRestart() {
-        this.model.reset();
-        this.displayCurrentQuestion();
+    gererReponse(reponseUtilisateur) {
+        const bonneReponse = Model.questions[Model.indexQuestion].correct;
+        
+        if (reponseUtilisateur === bonneReponse) {
+            Model.score++;
+        } else {
+            alert("Faux ! La bonne réponse était : " + bonneReponse);
+        }
+
+        Model.indexQuestion++;
+        this.chargerQuestionSuivante();
     }
-}
+};

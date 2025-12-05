@@ -1,58 +1,27 @@
-export class QuizModel {
-    constructor() {
-        this.score = 0;
-        this.currentQuestionIndex = 0;
-        
-        // Vos données (Questions)
-        this.questions = [
-            {
-                question: "Quelle est la capitale de la Savoie ?",
-                options: ["Annecy", "Chambéry", "Grenoble", "Lyon"],
-                correct: "Chambéry"
-            },
-            {
-                question: "Lequel de ces frameworks est basé sur JavaScript ?",
-                options: ["Laravel", "Django", "React", "Spring"],
-                correct: "React"
-            },
-            {
-                question: "Quelle balise HTML crée un lien hypertexte ?",
-                options: ["<link>", "<a>", "<href>", "<p>"],
-                correct: "<a>"
-            },
-            {
-                question: "Que signifie 'CSS' ?",
-                options: ["Cascading Style Sheets", "Creative Style System", "Computer Style Sheets", "Colorful Style Sheets"],
-                correct: "Cascading Style Sheets"
-            }
-        ];
-    }
-
-    getCurrentQuestion() {
-        return this.questions[this.currentQuestionIndex];
-    }
-
-    checkAnswer(answer) {
-        const currentQ = this.getCurrentQuestion();
-        if (answer === currentQ.correct) {
-            this.score++;
+const Model = {
+    score: 0,
+    indexQuestion: 0,
+    
+    questions: [
+        {
+            question: "C'est quoi la différence de PRIX entre Windows et Linux ?",
+            options: ["Linux coûte 500€", "Les deux sont payants", "Linux est souvent gratuit", "Windows est gratuit"],
+            correct: "Linux est souvent gratuit"
+        },
+        {
+            question: "Que signifie 'Open Source' pour Linux ?",
+            options: ["Code public et modifiable", "Logiciel portes ouvertes", "Facile à pirater", "Fabriqué par Microsoft"],
+            correct: "Code public et modifiable"
+        },
+        {
+            question: "Quel est l'avantage des mises à jour Linux ?",
+            options: ["Jamais de mises à jour", "Pas de redémarrage forcé", "Elles durent 4 heures", "Elles plantent tout"],
+            correct: "Pas de redémarrage forcé"
+        },
+        {
+            question: "Qui est la mascotte de Linux ?",
+            options: ["Un chat noir", "Un robot", "Un manchot (Tux)", "Une fenêtre"],
+            correct: "Un manchot (Tux)"
         }
-    }
-
-    nextQuestion() {
-        this.currentQuestionIndex++;
-    }
-
-    hasMoreQuestions() {
-        return this.currentQuestionIndex < this.questions.length;
-    }
-
-    getTotalQuestions() {
-        return this.questions.length;
-    }
-
-    reset() {
-        this.score = 0;
-        this.currentQuestionIndex = 0;
-    }
-}
+    ]
+};
