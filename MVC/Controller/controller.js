@@ -58,11 +58,31 @@ const Controller = {
         if (reponseUtilisateur === bonneReponse) {
             Model.score++;
         } else {
-            alert("Faux ! La bonne réponse était : " + bonneReponse);
+            this.triggerPunition();
         }
 
         Model.indexQuestion++;
-        this.afficherQuestion();
+        
+        setTimeout(() => {
+            this.afficherQuestion();
+        }, 1000);
+    },
+
+    triggerPunition() {
+        const body = document.body;
+        const meme = document.getElementById('meme-overlay');
+        const quizBox = document.getElementById('quiz-main-box');
+
+        quizBox.classList.add('shake-effect');
+
+        meme.classList.add('active');
+
+        body.classList.add('bg-error');
+        setTimeout(() => {
+            quizBox.classList.remove('shake-effect');
+            meme.classList.remove('active');
+            body.classList.remove('bg-error');
+        }, 800);
     },
 
     async afficherResultat() {

@@ -1,48 +1,87 @@
+:root {
+    --main-green: #4F7942;
+    --bg-color: #e8f5e9;
+}
+
 body {
-    background-color: #f4f6f8;
+    background-color: var(--main-green);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    transition: background-color 0.2s;
+}
+
+.floating-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.floating-item {
+    position: absolute;
+    bottom: -100px;
+    font-size: 3rem;
+    opacity: 0.3;
+    animation: floatUp 10s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-110vh) rotate(360deg); }
 }
 
 .quiz-container {
     max-width: 700px;
     margin-top: 5rem;
+    position: relative;
+    z-index: 10;
 }
 
 .card {
     border: none;
     border-radius: 1rem;
-    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
 }
 
-.form-check-label {
-    cursor: pointer;
-    padding: 1.25rem;
-    background-color: #fff;
-    border: 2px solid #e9ecef;
-    border-radius: 0.75rem;
-    transition: all 0.2s ease-in-out;
-    display: block;
-    width: 100%;
-    font-size: 1.1rem;
-    font-weight: 500;
+
+#meme-overlay {
+    position: fixed;
+    bottom: -500px;
+    right: 0;
+    width: 300px;
+    transition: bottom 0.2s ease-out;
+    z-index: 100;
+    pointer-events: none;
 }
 
-.form-check-input {
-    display: none; 
+#meme-overlay.active {
+    bottom: 0;
 }
 
-.form-check-input:checked + .form-check-label {
-    background-color: #e7f1ff;
-    border-color: #0d6efd;
-    color: #0d6efd;
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+.shake-effect {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
 }
 
-.form-check-label:hover {
-    border-color: #b6d4fe;
-    background-color: #f8f9fa;
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-.d-none {
-    display: none !important;
+/* Flash rouge pour l'erreur */
+.bg-error {
+    background-color: #ff4d4d !important;
 }
