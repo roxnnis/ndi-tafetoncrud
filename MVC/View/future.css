@@ -42,6 +42,11 @@ h3 {
     padding-bottom: 10px;
 }
 
+.collapsed:hover {
+    background-color: #3e5e32;
+    color: white;
+}
+
 .enchant {
     font-family: "Pixelify Sans", sans-serif;
     font-weight: 700;
