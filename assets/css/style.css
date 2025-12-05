@@ -47,19 +47,22 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
 }
 
-
-#meme-overlay {
+#meme-overlay, #success-overlay {
     position: fixed;
-    bottom: -500px;
-    right: 0;
-    width: 300px;
-    transition: bottom 0.2s ease-out;
-    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 80vh;
+    max-width: 600px;
+    transition: transform 0.1s cubic-bezier(0.5, 0, 0.5, 1.5);
+    z-index: 2000;
     pointer-events: none;
+    border-radius: 30px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
 }
 
-#meme-overlay.active {
-    bottom: 0;
+#meme-overlay.active, #success-overlay.active {
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .shake-effect {
@@ -81,7 +84,10 @@ body {
     100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-/* Flash rouge pour l'erreur */
 .bg-error {
     background-color: #ff4d4d !important;
+}
+
+.bg-success {
+    background-color: #66ff66 !important;
 }

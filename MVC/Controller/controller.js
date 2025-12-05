@@ -1,5 +1,7 @@
 const Controller = {
     appContainer: null,
+    audioError: new Audio('assets/sfx/error.mp3'),
+    audioSuccess: new Audio('assets/sfx/success.mp3'),
 
     async init() {
         this.appContainer = document.getElementById('app-container');
@@ -13,7 +15,7 @@ const Controller = {
             return await response.text();
         } catch (error) {
             console.error(error);
-            alert("Erreur : Impossible de charger les vues. Utilisez-vous bien Live Server ?");
+            alert("Erreur de chargement. Vérifiez Live Server.");
         }
     },
 
@@ -29,7 +31,7 @@ const Controller = {
             return;
         }
 
-        const html = await this.fetchTemplate('MVC/Vue/game.html');
+        const html = await this.fetchTemplate('MVC/Vue/templates/game.html');
         this.appContainer.innerHTML = html;
 
         const currentQ = Model.questions[Model.indexQuestion];
@@ -39,15 +41,13 @@ const Controller = {
         document.getElementById('total-questions').textContent = Model.questions.length;
 
         const answersArea = document.getElementById('answers-area');
-        answersArea.innerHTML = ''; 
+        answersArea.innerHTML = '';
 
         currentQ.options.forEach(option => {
             const btn = document.createElement('button');
             btn.className = "btn btn-outline-dark text-start py-3 px-4 fw-bold shadow-sm";
             btn.textContent = option;
-            
             btn.onclick = () => this.gererReponse(option);
-            
             answersArea.appendChild(btn);
         });
     },
@@ -57,6 +57,7 @@ const Controller = {
         
         if (reponseUtilisateur === bonneReponse) {
             Model.score++;
+            this.triggerSuccess();
         } else {
             this.triggerPunition();
         }
@@ -65,7 +66,7 @@ const Controller = {
         
         setTimeout(() => {
             this.afficherQuestion();
-        }, 1000);
+        }, 1200);
     },
 
     triggerPunition() {
@@ -73,20 +74,38 @@ const Controller = {
         const meme = document.getElementById('meme-overlay');
         const quizBox = document.getElementById('quiz-main-box');
 
-        quizBox.classList.add('shake-effect');
+        this.audioError.currentTime = 0;
+        this.audioError.play().catch(e => console.log("Audio play failed", e));
 
+        if(quizBox) quizBox.classList.add('shake-effect');
         meme.classList.add('active');
-
         body.classList.add('bg-error');
+
         setTimeout(() => {
-            quizBox.classList.remove('shake-effect');
+            if(quizBox) quizBox.classList.remove('shake-effect');
             meme.classList.remove('active');
             body.classList.remove('bg-error');
-        }, 800);
+        }, 1000);
+    },
+
+    triggerSuccess() {
+        const body = document.body;
+        const successImg = document.getElementById('success-overlay');
+        
+        this.audioSuccess.currentTime = 0;
+        this.audioSuccess.play().catch(e => console.log("Audio play failed", e));
+
+        successImg.classList.add('active');
+        body.classList.add('bg-success');
+
+        setTimeout(() => {
+            successImg.classList.remove('active');
+            body.classList.remove('bg-success');
+        }, 1000);
     },
 
     async afficherResultat() {
-        const html = await this.fetchTemplate('MVC/Vue/result.html');
+        const html = await this.fetchTemplate('MVC/Vue/templates/result.html');
         this.appContainer.innerHTML = html;
 
         document.getElementById('final-score').textContent = `${Model.score} / ${Model.questions.length}`;
