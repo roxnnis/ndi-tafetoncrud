@@ -39,6 +39,7 @@ h3 {
     background-color: #4F7942;
     color: white;
     font-family: "Lilita One", sans-serif;
+    padding-bottom: 10px;
 }
 
 .enchant {
@@ -47,4 +48,43 @@ h3 {
     font-size: 1.2em;
     text-shadow: rgb(220, 45, 255) 0px 0px 10px;
     
+}
+
+
+/* From Uiverse.io by Jedi-hongbin */ 
+.home {
+ display: flex;
+ height: 3em;
+ width: 100px;
+ align-items: center;
+ justify-content: center;
+ background-color: #eeeeee4b;
+ border-radius: 3px;
+ letter-spacing: 1px;
+ transition: all 0.2s linear;
+ cursor: pointer;
+ border: none;
+ background: #fff;
+}
+
+.home > svg {
+ margin-right: 5px;
+ margin-left: 5px;
+ font-size: 20px;
+ transition: all 0.4s ease-in;
+}
+
+.home:hover > svg {
+ font-size: 1.2em;
+ transform: translateX(-5px);
+}
+
+.home:hover {
+ box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+ transform: translateY(-2px);
+}
+
+span a {
+    text-decoration: none;
+    color: black;
 }
