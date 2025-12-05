@@ -30,7 +30,7 @@ const Model = {
         },
         {
             question: "Quand on stocke un fichier sur le 'Cloud', où est-il réellement ?",
-            options: ["Dans un satellite", "Dans les nuages (vapeur d'eau)", "Nulle part, c'est magique", "Sur des serveurs allumés 24h/24"],
+            options: ["Dans un satellite", "Dans les nuages", "Nulle part, c'est magique", "Sur des serveurs allumés 24h/24"],
             correct: "Sur des serveurs allumés 24h/24"
         },
         {
