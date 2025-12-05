@@ -4,9 +4,9 @@ const Model = {
 
     questions: [
         {
-            question: "C'est quoi la différence de PRIX entre Windows et Linux ?",
-            options: ["Linux coûte 500€", "Les deux sont payants", "Linux est souvent gratuit", "Windows est gratuit"],
-            correct: "Linux est souvent gratuit"
+            question: "Combien ça coûte d'installer Linux sur ton PC ?",
+            options: ["C'est 100% Gratuit (0€)", "Il faut payer un abonnement mensuel", "Ça coûte le prix d'un Kebab", "C'est gratuit seulement le mardi"],
+            correct: "C'est 100% Gratuit (0€)"
         },
         {
             question: "Que signifie 'Open Source' pour Linux ?",
@@ -20,13 +20,13 @@ const Model = {
         },
         {
             question: "Qui est la mascotte de Linux ?",
-            options: ["Un chat noir", "Un robot", "Un manchot (Tux)", "Une fenêtre"],
-            correct: "Un manchot (Tux)"
+            options: ["Un chat noir", "Un robot", "Un manchot", "Une fenêtre"],
+            correct: "Un manchot"
         },
         {
             question: "Qui sont les 'GAFAM' ?",
-            options: ["Les 5 géants du web (Google, Apple, Facebook...)", "Un groupe de musique", "Une marque de téléphone français", "Le nom d'un virus"],
-            correct: "Les 5 géants du web (Google, Apple, Facebook...)"
+            options: ["Les 5 géants du web", "Un groupe de musique", "Une marque de téléphone français", "Le nom d'un virus"],
+            correct: "Les 5 géants du web"
         },
         {
             question: "Quand on stocke un fichier sur le 'Cloud', où est-il réellement ?",

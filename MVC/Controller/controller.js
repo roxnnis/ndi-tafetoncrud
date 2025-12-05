@@ -2,9 +2,15 @@ const Controller = {
     appContainer: null,
     audioError: new Audio('assets/sfx/error.mp3'),
     audioSuccess: new Audio('assets/sfx/success.mp3'),
+    audioFin: new Audio('assets/sfx/fin_quiz.mp3'),
 
     async init() {
         this.appContainer = document.getElementById('app-container');
+        
+        this.audioError.load();
+        this.audioSuccess.load();
+        this.audioFin.load();
+
         this.start();
     },
 
@@ -15,7 +21,7 @@ const Controller = {
             return await response.text();
         } catch (error) {
             console.error(error);
-            alert("Erreur de chargement. Vérifiez Live Server.");
+            this.appContainer.innerHTML = "<h2 class='text-danger text-center'>Erreur : Vérifiez les chemins des fichiers HTML !</h2>";
         }
     },
 
@@ -31,8 +37,8 @@ const Controller = {
             return;
         }
 
-        const html = await this.fetchTemplate('MVC/Vue/templates/game.html');
-        this.appContainer.innerHTML = html;
+        const html = await this.fetchTemplate('MVC/Vue/game.html');
+        if(html) this.appContainer.innerHTML = html;
 
         const currentQ = Model.questions[Model.indexQuestion];
 
@@ -72,10 +78,10 @@ const Controller = {
     triggerPunition() {
         const body = document.body;
         const meme = document.getElementById('meme-overlay');
-        const quizBox = document.getElementById('quiz-main-box');
+        const quizBox = document.getElementById('game-widget');
 
         this.audioError.currentTime = 0;
-        this.audioError.play().catch(e => console.log("Audio play failed", e));
+        this.audioError.play().catch(e => console.log("Erreur son:", e));
 
         if(quizBox) quizBox.classList.add('shake-effect');
         meme.classList.add('active');
@@ -93,7 +99,7 @@ const Controller = {
         const successImg = document.getElementById('success-overlay');
         
         this.audioSuccess.currentTime = 0;
-        this.audioSuccess.play().catch(e => console.log("Audio play failed", e));
+        this.audioSuccess.play().catch(e => console.log("Erreur son:", e));
 
         successImg.classList.add('active');
         body.classList.add('bg-success');
@@ -105,15 +111,18 @@ const Controller = {
     },
 
     async afficherResultat() {
-        const html = await this.fetchTemplate('MVC/Vue/templates/result.html');
-        this.appContainer.innerHTML = html;
+        const html = await this.fetchTemplate('MVC/Vue/result.html');
+        if(html) this.appContainer.innerHTML = html;
+
+        this.audioFin.currentTime = 0;
+        this.audioFin.play().catch(e => console.log("Erreur son fin:", e));
 
         document.getElementById('final-score').textContent = `${Model.score} / ${Model.questions.length}`;
         
         const comment = document.getElementById('comment-text');
-        if (Model.score === Model.questions.length) comment.textContent = "Expert Linux ! 🐧";
-        else if (Model.score > Model.questions.length/2) comment.textContent = "Pas mal du tout !";
-        else comment.textContent = "Windows t'a eu... Réessaye !";
+        if (Model.score === Model.questions.length) comment.textContent = "Légende absolue ! Tux est fier de toi ! 🐧👑";
+        else if (Model.score > Model.questions.length/2) comment.textContent = "Bien joué ! Tu gères le pingouin.";
+        else comment.textContent = "Aïe... Retourne sur Windows ! (Non je rigole, réessaie)";
 
         document.getElementById('btn-restart').onclick = () => this.start();
     }
