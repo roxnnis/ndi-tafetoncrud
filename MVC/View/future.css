@@ -1,0 +1,12 @@
+.titles {
+    background-color: #4F7942;
+    color: white;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+accordion-body {
+    text-wrap: initial;
+    background-color: #d0ffc2;
+
+}
