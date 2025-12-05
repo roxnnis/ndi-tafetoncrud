@@ -2,3 +2,126 @@
     width: 120;
     height: 50px;
 }
+
+section {
+    margin-bottom: 50px;
+}
+
+        .content-section { padding: 60px 0; }
+        .bg-light-alt { background-color: #f7f7f7; }
+        
+        /* Animation Clignotante (Blinking) */
+        @keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0.7); /* Vert Forêt avec opacité */
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 15px rgba(34, 139, 34, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0);
+    }
+}
+
+        .btn-linux-quizz {
+            background-color: #228B22; /* Vert Forêt */
+            color: white;
+            border: 2px solid #228B22;
+            padding: 15px 30px; /* Augmente le rembourrage */
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 0 rgba(34, 139, 34, 0.4); /* Ombre pour l'effet de pulsation */
+            animation: pulse 2s infinite; /* Applique l'animation */
+        }
+        
+        /* Assurer une bonne hauteur pour l'image et l'alignement */
+        .content-section img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Changement de couleur au survol pour l'interactivité */
+.btn-linux-quizz:hover {
+    background-color: #4F7942; /* Vert Olive (couleur secondaire suggérée) */
+    border-color: #4F7942;
+    color: white;
+}
+
+/* Style pour le bouton Performance/Challenge */
+.btn-performance-challenge {
+    /* Couleur Principale : Vert Forêt */
+    background-color: #228B22; 
+    color: white;
+    border: 2px solid #228B22;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+    /* Animation de pulsation (reprise de l'effet d'alerte) */
+    box-shadow: 0 0 0 rgba(34, 139, 34, 0.4); 
+    animation: pulse-challenge 2s infinite; 
+}
+
+/* Changement de couleur au survol */
+.btn-performance-challenge:hover {
+    background-color: #4F7942; /* Vert Olive */
+    border-color: #4F7942;
+    color: white;
+}
+
+/* L'animation de pulsation reste la même, assurant la répétition visuelle */
+@keyframes pulse-challenge {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0.7); 
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 15px rgba(34, 139, 34, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0);
+    }
+}
+
+/* Définition du Vert Forêt (#228B22) */
+.text-forest-green {
+    color: #228B22 !important;
+}
+
+.bg-forest-green {
+    background-color: #228B22 !important;
+}
+
+.btn-forest-green {
+    background-color: #228B22 !important;
+    border-color: #228B22 !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.btn-forest-green:hover {
+    background-color: #4F7942 !important; /* Vert Olive pour le survol */
+    border-color: #4F7942 !important;
+}
+
+/* Style pour l'image du logo */
+.photoNavBar {
+    height: 40px; /* Taille appropriée pour une navbar */
+    border-radius: 50%; /* Rond pour un aspect plus doux */
+    border: 2px solid #228B22; /* Bordure Vert Forêt */
+    padding: 2px;
+}
+
+/* Couleur de l'icone du Toggler */
+.navbar-toggler-icon {
+    /* Utilisation d'un filtre pour colorer l'icone en SVG.
+       Alternativement, utilisez un SVG ou une icône personnalisée si possible. */
+    filter: invert(30%) sepia(80%) saturate(1000%) hue-rotate(100deg) brightness(80%);
+}
