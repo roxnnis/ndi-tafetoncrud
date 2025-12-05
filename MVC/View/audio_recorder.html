@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDI - Module d'Enregistrement Audio</title>
+    <link rel="stylesheet" href="../../assets/CSS/audio_recorder.css">
+</head>
+<body>
+    <div class="audio-recorder-container">
+        <!-- En-tête -->
+        <header class="header">
+            <h1>🎙️ Module d'Enregistrement Audio</h1>
+            <p class="subtitle">Enregistrement, transcription et détection intelligente</p>
+        </header>
+
+        <!-- Panneau de contrôle principal -->
+        <div class="main-panel">
+            <div class="control-section">
+                <h2>Panneau de Contrôle</h2>
+                
+                <!-- Boutons de contrôle -->
+                <div class="control-buttons">
+                    <button id="startBtn" class="btn btn-start" title="Démarrer l'enregistrement">
+                        <span class="icon">⏺</span>
+                        <span>Démarrer</span>
+                    </button>
+                    <button id="pauseBtn" class="btn btn-pause" disabled title="Mettre en pause">
+                        <span class="icon">⏸</span>
+                        <span>Pause</span>
+                    </button>
+                    <button id="stopBtn" class="btn btn-stop" disabled title="Arrêter l'enregistrement">
+                        <span class="icon">⏹</span>
+                        <span>Arrêter</span>
+                    </button>
+                </div>
+
+                <!-- Indicateur d'état -->
+                <div class="status-indicator">
+                    <div class="status-light" id="statusLight"></div>
+                    <span id="statusText">Prêt à enregistrer</span>
+                </div>
+
+                <!-- Timer -->
+                <div class="timer-display">
+                    <span id="timerDisplay">00:00:00</span>
+                </div>
+
+                <!-- Options d'enregistrement -->
+                <div class="recording-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="enableSilenceDetection" checked>
+                        <span>Détection de blancs</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="enableTranscription">
+                        <span>Transcription en temps réel</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="enableEmailAlerts" checked>
+                        <span>Alertes email</span>
+                    </label>
+                </div>
+
+                <!-- Visualiseur audio -->
+                <div class="audio-visualizer">
+                    <canvas id="audioCanvas"></canvas>
+                </div>
+            </div>
+
+            <!-- Zone de transcription -->
+            <div class="transcription-section" id="transcriptionSection" style="display: none;">
+                <h3>📝 Transcription en temps réel</h3>
+                <div class="transcription-display" id="transcriptionDisplay">
+                    <p class="placeholder">La transcription apparaîtra ici...</p>
+                </div>
+                <div class="transcription-stats">
+                    <span>Mots: <strong id="wordCount">0</strong></span>
+                    <span>Segments: <strong id="segmentCount">0</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Onglets -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="recordings">📁 Enregistrements</button>
+            <button class="tab-btn" data-tab="silences">🔇 Détection de Blancs</button>
+            <button class="tab-btn" data-tab="transcriptions">📝 Transcriptions</button>
+            <button class="tab-btn" data-tab="config">⚙️ Configuration</button>
+            <button class="tab-btn" data-tab="statistics">📊 Statistiques</button>
+        </div>
+
+        <!-- Contenu des onglets -->
+        <div class="tab-content">
+            <!-- Onglet Enregistrements -->
+            <div id="recordings" class="tab-panel active">
+                <div class="panel-header">
+                    <h2>Enregistrements</h2>
+                    <button class="btn btn-secondary" id="cleanupBtn">🗑️ Nettoyer expirés</button>
+                </div>
+                <div class="recordings-list" id="recordingsList">
+                    <p class="empty-message">Aucun enregistrement pour le moment</p>
+                </div>
+            </div>
+
+            <!-- Onglet Détection de Blancs -->
+            <div id="silences" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Détection de Blancs</h2>
+                    <div class="silence-stats">
+                        <div class="stat-box">
+                            <span class="stat-value" id="totalSilences">0</span>
+                            <span class="stat-label">Total</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value natural" id="naturalSilences">0</span>
+                            <span class="stat-label">Naturels</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value unnatural" id="unnaturalSilences">0</span>
+                            <span class="stat-label">Non-naturels</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="silences-list" id="silencesList">
+                    <p class="empty-message">Aucun blanc détecté</p>
+                </div>
+            </div>
+
+            <!-- Onglet Transcriptions -->
+            <div id="transcriptions" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Transcriptions</h2>
+                </div>
+                <div class="transcriptions-list" id="transcriptionsList">
+                    <p class="empty-message">Aucune transcription disponible</p>
+                </div>
+            </div>
+
+            <!-- Onglet Configuration -->
+            <div id="config" class="tab-panel">
+                <div class="config-sections">
+                    <!-- Configuration Enregistrement -->
+                    <div class="config-section">
+                        <h3>🎙️ Enregistrement Audio</h3>
+                        <div class="config-form">
+                            <div class="form-group">
+                                <label>Format audio</label>
+                                <select id="audioFormat">
+                                    <option value="audio/webm;codecs=opus">WebM (Opus)</option>
+                                    <option value="audio/webm">WebM</option>
+                                    <option value="audio/mp4">MP4</option>
+                                    <option value="audio/ogg">OGG</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Qualité (bitrate)</label>
+                                <select id="audioBitrate">
+                                    <option value="64000">64 kbps</option>
+                                    <option value="128000" selected>128 kbps</option>
+                                    <option value="192000">192 kbps</option>
+                                    <option value="256000">256 kbps</option>
+                                    <option value="320000">320 kbps</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Durée maximale</label>
+                                <select id="maxDuration">
+                                    <option value="1800000">30 minutes</option>
+                                    <option value="3600000" selected>1 heure</option>
+                                    <option value="7200000">2 heures</option>
+                                    <option value="14400000">4 heures</option>
+                                    <option value="28800000">8 heures</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Durée de vie des fichiers (jours)</label>
+                                <input type="number" id="retentionDays" min="1" max="365" value="30">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Configuration Détection de Blancs -->
+                    <div class="config-section">
+                        <h3>🔇 Détection de Blancs</h3>
+                        <div class="config-form">
+                            <div class="form-group">
+                                <label>Seuil de détection (dB)</label>
+                                <input type="number" id="silenceThreshold" min="-100" max="0" value="-40">
+                            </div>
+                            <div class="form-group">
+                                <label>Durée minimale du blanc (ms)</label>
+                                <input type="number" id="minSilenceDuration" min="100" max="10000" step="100" value="3000">
+                            </div>
+                            <div class="form-group">
+                                <label>Durée max blanc naturel (ms)</label>
+                                <input type="number" id="naturalSilenceMax" min="1000" max="30000" step="1000" value="5000">
+                            </div>
+                            <div class="form-group">
+                                <label>Seuil alerte notification (ms)</label>
+                                <input type="number" id="notificationThreshold" min="5000" max="60000" step="1000" value="10000">
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="enableAIDetection" checked>
+                                    <span>Activer la détection IA</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Configuration Transcription -->
+                    <div class="config-section">
+                        <h3>📝 Transcription</h3>
+                        <div class="config-form">
+                            <div class="form-group">
+                                <div style="background: #fff3cd; padding: 15px; border-radius: 5px; border-left: 4px solid #ffc107; margin-bottom: 15px;">
+                                    <strong>⚠️ Compatibilité :</strong><br>
+                                    La transcription utilise Web Speech API (gratuite) et fonctionne sur :<br>
+                                    ✅ Google Chrome<br>
+                                    ✅ Microsoft Edge<br>
+                                    ✅ Safari<br>
+                                    ❌ Mozilla Firefox (non supporté)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Langue</label>
+                                <select id="transcriptionLanguage">
+                                    <option value="fr-FR" selected>Français</option>
+                                    <option value="en-US">Anglais (US)</option>
+                                    <option value="en-GB">Anglais (UK)</option>
+                                    <option value="es-ES">Espagnol</option>
+                                    <option value="de-DE">Allemand</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Seuil conversation longue (minutes)</label>
+                                <input type="number" id="conversationThreshold" min="1" max="60" value="5">
+                            </div>
+                            <div class="form-group">
+                                <label>Durée max segment (minutes)</label>
+                                <input type="number" id="segmentMaxDuration" min="1" max="120" value="10">
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="enableAutoSegmentation" checked>
+                                    <span>Segmentation automatique</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-actions">
+                    <button class="btn btn-primary" id="saveConfigBtn">💾 Sauvegarder la configuration</button>
+                    <button class="btn btn-secondary" id="resetConfigBtn">↺ Réinitialiser</button>
+                </div>
+            </div>
+
+            <!-- Onglet Statistiques -->
+            <div id="statistics" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Statistiques Globales</h2>
+                    <button class="btn btn-secondary" id="generateReportBtn">📄 Générer un rapport</button>
+                </div>
+                <div class="statistics-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📁</div>
+                        <div class="stat-content">
+                            <h3 id="statTotalRecordings">0</h3>
+                            <p>Enregistrements</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-content">
+                            <h3 id="statTotalDuration">0h 0m</h3>
+                            <p>Durée totale</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💾</div>
+                        <div class="stat-content">
+                            <h3 id="statTotalSize">0 MB</h3>
+                            <p>Taille totale</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔇</div>
+                        <div class="stat-content">
+                            <h3 id="statTotalSilences">0</h3>
+                            <p>Blancs détectés</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-content">
+                            <h3 id="statAlertsSent">0</h3>
+                            <p>Alertes envoyées</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <div class="stat-content">
+                            <h3 id="statTranscriptions">0</h3>
+                            <p>Transcriptions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour renommer -->
+    <div id="renameModal" class="modal">
+        <div class="modal-content">
+            <h3>Renommer l'enregistrement</h3>
+            <input type="text" id="renameInput" class="modal-input" placeholder="Nouveau nom">
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="confirmRenameBtn">Confirmer</button>
+                <button class="btn btn-secondary" id="cancelRenameBtn">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../MVC/Model/AudioRecorder.js"></script>
+    <script src="../../MVC/Model/SilenceDetector.js"></script>
+    <script src="../../MVC/Model/TranscriptionService.js"></script>
+    <script src="../../MVC/Controller/audio_controller.js"></script>
+    <script src="audio_recorder_ui.js"></script>
+</body>
+</html>
