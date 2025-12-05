@@ -1,0 +1,211 @@
+.photoNavBar{
+    width: 120;
+    height: 50px;
+}
+
+.content-section {
+    padding: 60px 0;
+}
+
+.bg-light-alt {
+    background-color: #f7f7f7; 
+}
+        
+@keyframes pulse {
+
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0.7); /
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 15px rgba(34, 139, 34, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0);
+    }
+}
+
+.btn-linux-quizz {
+    background-color: #228B22; 
+    color: white;
+    border: 2px solid #228B22;
+    padding: 15px 30px; 
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 0 0 rgba(34, 139, 34, 0.4); 
+    animation: pulse 2s infinite; 
+}
+        
+.content-section img {
+    max-width: 100%;
+    height: auto;
+}
+
+.btn-linux-quizz:hover {
+    background-color: #4F7942; 
+    border-color: #4F7942;
+    color: white;
+}
+
+.btn-performance-challenge {
+    background-color: #228B22; 
+    color: white;
+    border: 2px solid #228B22;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+    box-shadow: 0 0 0 rgba(34, 139, 34, 0.4); 
+    animation: pulse-challenge 2s infinite; 
+}
+
+.btn-performance-challenge:hover {
+    background-color: #4F7942; 
+    border-color: #4F7942;
+    color: white;
+}
+
+@keyframes pulse-challenge {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0.7); 
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 15px rgba(34, 139, 34, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0);
+    }
+}
+
+.text-forest-green {
+    color: #228B22 !important;
+}
+
+.bg-forest-green {
+    background-color: #228B22 !important;
+}
+
+.btn-forest-green {
+    background-color: #228B22 !important;
+    border-color: #228B22 !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.btn-forest-green:hover {
+    background-color: #4F7942 !important; 
+    border-color: #4F7942 !important;
+}
+
+.photoNavBar {
+    height: 40px; 
+    
+}
+
+.navbar-toggler-icon {
+    filter: invert(30%) sepia(80%) saturate(1000%) hue-rotate(100deg) brightness(80%);
+}
+/* L'animation de pulsation (pulse-forum) a été supprimée ici, car elle est souvent moins "esthétique" que l'effet de flottaison moderne.
+   Si vous souhaitez la conserver en plus, vous pouvez la réactiver sur la classe. */
+
+   /* Définition du Vert Forêt et de la couleur neutre des liens */
+.text-forest-green {
+    color: #228B22 !important;
+}
+
+.bg-forest-green {
+    background-color: #228B22 !important;
+}
+
+/* Style des liens de navigation (Desktop) */
+.nav-link-stylish {
+    color: #6c757d !important; /* Gris neutre pour les liens par défaut */
+    font-weight: 500;
+    margin: 0 10px;
+    border-bottom: 2px solid transparent; /* Ligne pour l'effet de survol/actif */
+    transition: all 0.3s ease;
+}
+
+.nav-link-stylish:hover {
+    color: #228B22 !important; /* Vert Forêt au survol */
+    border-bottom: 2px solid #228B22; /* Ligne Verte Forêt au survol */
+}
+
+.nav-link-stylish.active {
+    color: #228B22 !important; /* Vert Forêt pour le lien actif */
+    border-bottom: 2px solid #228B22; 
+    font-weight: 600;
+}
+
+/* Style du Toggler (Icône du menu mobile) */
+.navbar-toggler {
+    border-color: #228B22 !important; /* Bordure Toggler en Vert Forêt */
+}
+.navbar-toggler-icon {
+    /* Filtre pour colorer l'icône en SVG en Vert Forêt */
+    filter: invert(30%) sepia(80%) saturate(1000%) hue-rotate(100deg) brightness(80%);
+}
+/* Le style du bouton .btn-forum-stylish (arrondi et flottant) est déjà défini et utilisé ici. */
+
+/* Style du Bouton "Forum" - Plus Esthétique et Léger */
+/* Style du Bouton "Forum" - Accrocheur et Dynamique */
+.btn-forum-stylish {
+    /* Couleur et Forme de base (Vert Forêt) */
+    background-color: #1C4E1A !important; 
+    border: 1px solid #8FBC8F !important; /* Bordure blanche fine */
+    color: white !important;
+    font-weight: 600; 
+    padding: 18px 50px; /* Plus grand */
+    border-radius: 50px; 
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Espacement plus marqué */
+    
+    /* Ombre Initiale (légère) */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+    transition: all 0.3s ease;
+    
+    /* ANIMATION de PULSATION EN PERMANENCE */
+    animation: pulse-attention 2s infinite cubic-bezier(0.4, 0, 0.6, 1); /* Plus lisse */
+}
+
+/* Effet de Survol (Hover) - Flottaison et Ombre Forte */
+.btn-forum-stylish:hover {
+    /* Changement vers un Vert Mousse clair pour un contraste doux */
+    background-color: #8FBC8F !important; 
+    border-color: #FFFFFF !important; 
+    color: #111111 !important; 
+    
+    /* Ombre et Flottaison Accentuant l'envie de cliquer */
+    box-shadow: 0 15px 30px rgba(34, 139, 34, 0.6); /* Ombre Verte Forte */
+    transform: translateY(-5px); /* Flottaison plus haute */
+    animation: none; /* Arrête la pulsation au survol pour ne pas distraire */
+}
+
+/* Effet de Clic (Active) - Pousser */
+.btn-forum-stylish:active {
+    transform: translateY(1px); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+/* @keyframes pour l'animation de pulsation constante (ATTENTION) */
+@keyframes pulse-attention {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0.5); /* Ombre d'alerte en Vert Forêt */
+    }
+    50% {
+        transform: scale(1.02); /* Très légère augmentation de taille */
+        box-shadow: 0 0 0 10px rgba(34, 139, 34, 0); /* Ombre s'étire et disparaît */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0);
+    }
+}

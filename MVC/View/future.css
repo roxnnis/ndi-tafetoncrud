@@ -1,0 +1,50 @@
+body {
+    background-color: #e6ffe6;
+}
+
+.titles {
+    background-color: #4F7942;
+    color: white;
+    text-align: center;
+    padding-bottom: 10px;
+    font-family: "Lilita One", sans-serif;
+}
+
+h3 {
+    text-align: center;
+    padding: 10px;
+}
+
+
+.lilita-one-regular {
+  font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.pixelify-sans-pixel {
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 2;
+  font-style: normal;
+}
+
+.collapse {
+    background-color: #e6ffe6;
+    
+    font-family: "Lilita One", sans-serif;
+}
+
+.collapsed {
+    background-color: #4F7942;
+    color: white;
+    font-family: "Lilita One", sans-serif;
+}
+
+.enchant {
+    font-family: "Pixelify Sans", sans-serif;
+    font-weight: 700;
+    font-size: 1.2em;
+    text-shadow: rgb(220, 45, 255) 0px 0px 10px;
+    
+}

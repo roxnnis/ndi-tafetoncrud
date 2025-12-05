@@ -1,0 +1,174 @@
+@keyframes rainbow {
+    0% { 
+        color: #FF0000; 
+        transform: scale(1);
+    } 
+    50% { 
+        color: #00FF00; 
+        transform: scale(1.2); 
+    }
+    100% { 
+        color: #9400D3; 
+        transform: scale(1);
+    } 
+}
+
+.ecology {
+    color: #4F7942 ; 
+    font-weight: bold;
+    font-style: italic; 
+    font-size: 1.5em; 
+}
+
+@keyframes spin-goofy {
+    0% { 
+        transform: rotate(0deg); 
+    }
+    11% { 
+        transform: rotate(25deg); 
+    }
+    22% { 
+        transform: rotate(-25deg); 
+    }
+    33.3% { 
+        transform: rotate(0deg); 
+    }
+    100% { 
+        transform: rotate(0deg); 
+    } 
+}
+
+.goofy-rotation {
+    animation: spin-goofy 3s infinite;
+    display: block; 
+}
+
+.rainbow-text {
+    animation: rainbow 1.2s infinite; 
+    font-size: 1.5em; 
+    font-weight: bold;
+    display: inline-block; 
+}
+
+
+.hacker-style {
+    background-color: #000; 
+    color: #00ff00; 
+    font-family: 'Courier New', Courier, monospace; 
+    padding: 2px 6px; 
+    border-radius: 4px;
+    border: 1px solid #00ff00; 
+}
+
+/* animation de nausée mdrr */
+@keyframes nausea {
+    0% { transform: translate(0, 0) rotate(0deg); filter: blur(0px); }
+    25% { transform: translate(2px, 2px) rotate(1deg); }
+    50% { transform: translate(-2px, -2px) rotate(-1deg); filter: blur(0.8px);  }
+    75% { transform: translate(-2px, 2px) rotate(0.5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); filter: blur(0px); }
+}
+
+.uncool-card {
+    border: 2px solid #a3a832 !important; 
+    animation: nausea 3s infinite linear;
+}
+
+@keyframes tremble {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+}
+
+.prix {
+    color: #dc3545; 
+    font-weight: bold;
+    display: inline-block;
+    animation: tremble 0.5s infinite; 
+}
+
+
+
+.toxic-waste {
+    color: #5c4b38; 
+    font-weight: bold;
+    border-bottom: 2px solid #5c4b38;
+}
+
+
+.hidden-code {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.alert-nird-crimson {
+    background-color: #aa0808 !important; 
+    color: #FFFFFF !important;         
+    border-color: #aa0808 !important;     
+}
+
+.alert-nird-crimson h4 {
+    color: #FFFFFF !important;
+}
+
+
+.bg-couleurnoirtab {
+    background-color: #aa0808 !important;
+    color: #FFFFFF !important;
+}
+
+.border-couleurnoirtab {
+    border-color: #aa0808 !important;
+}
+
+
+.accordion-button:not(.collapsed) {
+    background-color: #f8f9fa !important; 
+    color: #495057 !important;           
+    box-shadow: none !important;         
+    border-color: #ced4da !important;   
+}
+
+.accordion-button.collapsed {
+    background-color: #e9ecef !important; 
+    color: #212529 !important;
+}
+
+.accordion-button:not(.collapsed)::after {
+    filter: brightness(0.5); 
+}
+
+.marginn{
+    margin: 2em;
+}
+
+@keyframes fuite-souris {
+    0% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(100px); 
+    }
+    100% {
+        transform: translateX(-10px); 
+    }
+}
+
+.mouvementcard:hover {
+    animation: fuite-souris 1.5s infinite alternate ease-in-out; 
+    
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. État normal (inchangé) */
+.mouvementcard {
+    transition: none; 
+}
+
+.bckground{
+    background-color: #3b1515;
+}
+
+#navbar-placeholder {
+    margin-bottom: 120px; 
+}
